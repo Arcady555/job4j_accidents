@@ -1,0 +1,4 @@
+CREATE TABLE IF NOT EXISTS autos (
+   id SERIAL PRIMARY KEY,
+   created TIMESTAMP
+);
