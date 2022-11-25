@@ -15,32 +15,56 @@
 </head>
 <body>
 <div class="alert alert-warning">
-<nav class="navbar navbar-expand-lg alert alert-primary">
+    <nav class="navbar navbar-expand-lg alert alert-primary">
  <!--   <a class="navbar-brand" href="#">Происшествия</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button> -->
-    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <div class="navbar-nav" class=" alert alert-primary">
-            <a class="nav-item nav-link" th:href="@{/index}">Home</a>
-            <a class="nav-item nav-link" th:href="@{/}">Page1</a>
-            <a class="nav-item nav-link" th:href="@{/}">Page2</a>
-            <a class="nav-item nav-link" th:href="@{/registration}">Добавить пользователя</a>
-            <a class="nav-item nav-link" th:if="${user.name == 'Гость'}" th:href="@{/loginPage}">
-                <span th:text="${user.name}"></span>
-                <span> | Войти</span>
-            </a>
-            <a class="nav-item nav-link" th:if="${user.name != 'Гость'}" th:href="@{/logout}">
-                <span th:text="${user.name}"></span>
-                <span> | Выйти</span>
-            </a>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav" class=" alert alert-primary">
+                <a class="nav-item nav-link" th:href="@{/index}">Home</a>
+                <a class="nav-item nav-link" th:href="@{/}">Page1</a>
+                <a class="nav-item nav-link" th:href="@{/}">Page2</a>
+                <a class="nav-item nav-link" th:href="@{/registration}">Добавить пользователя</a>
+                <a class="nav-item nav-link" th:if="${user.name == 'Гость'}" th:href="@{/loginPage}">
+                    <span th:text="${user.name}"></span>
+                    <span> | Войти</span>
+                </a>
+                <a class="nav-item nav-link" th:if="${user.name != 'Гость'}" th:href="@{/logout}">
+                    <span th:text="${user.name}"></span>
+                    <span> | Выйти</span>
+                </a>
+            </div>
         </div>
+    </nav>
+    <div class="row">
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Text</th>
+                <th scope="col">Address</th>
+                <th scope="col">Дата</th>
+                <th scope="col">Пользователь</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="accident: ${accidents}">
+                <td>
+                    <a th:href="@{|/accident/${accident.id}|}">
+                        <span th:text="${accident.id}"></span>
+                    </a>
+                </td>
+                <td width="10%" th:text="${accident.name}" />
+                <td width="40%" th:text="${accident.text}" />
+                <td width="10%" th:text="${accident.address}" />
+                <td width="15%" th:text="${accident.created}" />
+                <td width="15%" th:text="${task.user.name}" />
+            </tr>
+            </tbody>
+        </table>
     </div>
-</nav>
-
-<div class="container">
-    <div th:text="${user}"></div>
-</div>
 </div>
 </body>
 </html>
