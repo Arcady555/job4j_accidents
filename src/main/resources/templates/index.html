@@ -22,9 +22,9 @@
     </button> -->
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav" class=" alert alert-primary">
-                <a class="nav-item nav-link" th:href="@{/index}">Home</a>
-                <a class="nav-item nav-link" th:href="@{/}">Page1</a>
-                <a class="nav-item nav-link" th:href="@{/}">Page2</a>
+            <!--    <a class="nav-item nav-link" href="#">Главная</a>  -->
+                <a class="nav-item nav-link" th:href="@{/accidents}">Инциденты</a>
+                <a class="nav-item nav-link active" th:href="@{/addAccident}">Добавить Инцидент</a>
                 <a class="nav-item nav-link" th:href="@{/registration}">Добавить пользователя</a>
                 <a class="nav-item nav-link" th:if="${user.name == 'Гость'}" th:href="@{/loginPage}">
                     <span th:text="${user.name}"></span>
@@ -64,6 +64,9 @@
             </tr>
             </tbody>
         </table>
+        <a th:href="@{/create}">
+            <button type="button" class="btn btn-primary">Добавить инцидент</button>
+        </a>
     </div>
 </div>
 </body>

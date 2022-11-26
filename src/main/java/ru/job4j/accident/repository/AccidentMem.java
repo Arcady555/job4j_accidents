@@ -22,4 +22,12 @@ public class AccidentMem {
     public void create(Accident accident) {
 
     }
+
+    public Accident findById(int id) {
+        return null;
+    }
+
+    public void replace(Accident accident) {
+
+    }
 }
