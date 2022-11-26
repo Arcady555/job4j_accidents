@@ -5,6 +5,7 @@ import org.springframework.stereotype.Repository;
 import ru.job4j.accident.model.Accident;
 import net.jcip.annotations.ThreadSafe;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -12,10 +13,13 @@ import java.util.Map;
 @AllArgsConstructor
 @ThreadSafe
 public class AccidentMem {
-    Map<Integer, Accident> accidents = new HashMap<>();
+    private final Map<Integer, Accident> accidents = new HashMap<>();
 
-    public Map<Integer, Accident> findAll() {
-        return accidents;
+    public Collection<Accident> findAll() {
+        return accidents.values();
     }
 
+    public void create(Accident accident) {
+
+    }
 }

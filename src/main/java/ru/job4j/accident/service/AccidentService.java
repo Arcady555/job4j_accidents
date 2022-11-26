@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import ru.job4j.accident.model.Accident;
 import ru.job4j.accident.repository.AccidentMem;
 
-import java.util.Map;
+import java.util.Collection;
 
 @Service
 @AllArgsConstructor
@@ -14,7 +14,11 @@ import java.util.Map;
 public class AccidentService {
     private final AccidentMem accidentMem;
 
-    public Map<Integer, Accident> findAll() {
+    public Collection<Accident> findAll() {
         return accidentMem.findAll();
+    }
+
+    public void create(Accident accident) {
+        accidentMem.create(accident);
     }
 }
