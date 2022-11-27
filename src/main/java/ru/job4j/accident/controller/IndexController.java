@@ -10,7 +10,6 @@ import ru.job4j.accident.service.AccidentService;
 @Controller
 @AllArgsConstructor
 @ThreadSafe
-@RequestMapping("/accident")
 public class IndexController {
 
     private final AccidentService accidentService;

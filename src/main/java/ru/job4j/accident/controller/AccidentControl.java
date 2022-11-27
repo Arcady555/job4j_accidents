@@ -11,21 +11,22 @@ import ru.job4j.accident.service.AccidentService;
 @Controller
 @AllArgsConstructor
 @ThreadSafe
+@RequestMapping("/accidents")
 public class AccidentControl {
     private final AccidentService accidents;
 
-    @GetMapping("/accident/{id}")
+    @GetMapping("/{id}")
     public String accidentGet(Model model, @PathVariable("id") int id) {
         if (accidents.findById(id).isPresent()) {
             model.addAttribute("accident", accidents.findById(id).get());
         }
-        return "accident";
+        return "accident/accident";
     }
 
     @GetMapping("/create")
     public String createAccidentGet(Model model) {
         model.addAttribute("accident", new Accident(0, "", "", null));
-        return "createAccident";
+        return "accident/createAccident";
     }
 
     @PostMapping("/create")
@@ -39,7 +40,7 @@ public class AccidentControl {
         if (accidents.findById(id).isPresent()) {
             model.addAttribute("accident", accidents.findById(id).get());
         }
-        return "editAccident";
+        return "accident/editAccident";
     }
 
     @PostMapping("/edit")
@@ -49,16 +50,16 @@ public class AccidentControl {
     }
 
     @GetMapping("/formUpdateAccident")
-    public String update(@RequestParam("id") int id, Model model) {
+    public String updateGet(@RequestParam("id") int id, Model model) {
         if (accidents.findById(id).isPresent()) {
             model.addAttribute("accident", accidents.findById(id).get());
         }
-        return "accident/update";
+        return "accident/formUpdateAccident";
     }
 
-    @PostMapping("/updateAccident")
-    public String save(@ModelAttribute Accident accident) {
+    @PostMapping("/formUpdateAccident")
+    public String updatePost(@ModelAttribute Accident accident) {
         accidents.create(accident);
-        return "redirect:/";
+        return "redirect:/index";
     }
 }

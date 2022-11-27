@@ -11,7 +11,7 @@
             integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
             integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-    <title>Автомобильные инцеденты</title>
+    <title>Автомобильные инциденты</title>
 </head>
 <body>
 <div class="alert alert-warning">
@@ -19,9 +19,9 @@
         <nav class="navbar navbar-expand-lg alert alert-primary">
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
-                    <a class="nav-item nav-link" href="#">Главная</a>
-                    <a class="nav-item nav-link" th:href="@{/accidents}">Инциденты</a>
-                    <a class="nav-item nav-link active" th:href="@{/create}">Добавить Инцидент</a>
+                    <a class="nav-item nav-link" th:href="@{/index}">Инциденты</a>
+                    <a class="nav-item nav-link active" th:href="@{/accidents/create}">Добавить Инцидент</a>
+                    <a class="nav-item nav-link" th:href="@{/registration}">Добавить пользователя</a>
                     <a class="nav-item nav-link" th:if="${user.name == 'Гость'}" th:href="@{/loginPage}">
                         <span th:text="${user.name}"></span>
                         <span> | Войти</span>
@@ -36,10 +36,10 @@
         <div class="row pt-3">
             <div class="card" style="width: 100%">
                 <div class="card-header">
-                    Редатирование инцидента
+                    Редактирование инцидента
                 </div>
                 <div class="card-body">
-                    <form th:action="@{/updateAccident}" method="POST" th:object="${accident}">
+                    <form th:action="@{/accidents/updateAccident}" method="POST" th:object="${accident}">
                         <input type="hidden" name="id" th:field="*{id}"/>
                         <div class="form-group">
                             <label for="name">Имя</label>
