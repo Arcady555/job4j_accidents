@@ -7,6 +7,7 @@ import ru.job4j.accident.model.Accident;
 import ru.job4j.accident.repository.AccidentMem;
 
 import java.util.Collection;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -22,7 +23,7 @@ public class AccidentService {
         accidentMem.create(accident);
     }
 
-    public Accident findById(int id) {
+    public Optional<Accident> findById(int id) {
         return accidentMem.findById(id);
     }
 

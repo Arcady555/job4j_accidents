@@ -36,15 +36,14 @@
         <div class="row pt-3">
             <div class="card" style="width: 100%">
                 <div class="card-header">
-                    Редатирование инцидента.
+                    Редатирование инцидента
                 </div>
                 <div class="card-body">
-                    <form th:action="@{/tasks/update}" method="POST" th:object="${accident}">
+                    <form th:action="@{/updateAccident}" method="POST" th:object="${accident}">
                         <input type="hidden" name="id" th:field="*{id}"/>
                         <div class="form-group">
-                            <label for="name">Имя
-                                <input type="text" size="320" class="form-control" name="name" id="name" th:field="*{name}">
-                            </label>
+                            <label for="name">Имя</label>
+                            <input type="text" class="form-control" name="name" id="name" th:field="*{name}">
                         </div>
                         <button type="submit" class="btn btn-primary">Сохранить</button>
                     </form>

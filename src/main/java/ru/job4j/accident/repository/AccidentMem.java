@@ -8,6 +8,7 @@ import net.jcip.annotations.ThreadSafe;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 @Repository
 @AllArgsConstructor
@@ -23,8 +24,13 @@ public class AccidentMem {
         accidents.putIfAbsent(accident.getId(), accident);
     }
 
-    public Accident findById(int id) {
-        return accidents.get(id);
+    public Optional<Accident> findById(int id) {
+        Optional<Accident> rsl = Optional.empty();
+        Accident accident = accidents.get(id);
+        if (accident != null) {
+            rsl = Optional.of(accident);
+        }
+        return rsl;
     }
 
     public void replace(Accident accident) {
