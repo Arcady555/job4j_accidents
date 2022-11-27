@@ -16,13 +16,13 @@
 <body>
 <div class="alert alert-warning">
     <nav class="navbar navbar-expand-lg alert alert-primary">
- <!--   <a class="navbar-brand" href="#">Происшествия</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button> -->
+        <!--   <a class="navbar-brand" href="#">Происшествия</a>
+           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+               <span class="navbar-toggler-icon"></span>
+           </button> -->
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav" class=" alert alert-primary">
-            <!--    <a class="nav-item nav-link" href="#">Главная</a>  -->
+                <!--    <a class="nav-item nav-link" href="#">Главная</a>  -->
                 <a class="nav-item nav-link" th:href="@{/accidents}">Инциденты</a>
                 <a class="nav-item nav-link active" th:href="@{/create}">Добавить Инцидент</a>
                 <a class="nav-item nav-link" th:href="@{/registration}">Добавить пользователя</a>
@@ -50,20 +50,21 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="accident: ${accidents}">
-                <td>
-                    <a th:href="@{|/accident/${accident.id}|}">
-                        <span th:text="${accident.id}"></span>
-                    </a>
-                </td>
-                <td width="10%" th:text="${accident.name}" />
-                <td width="40%" th:text="${accident.text}" />
-                <td width="10%" th:text="${accident.address}" />
-                <td width="15%" th:text="${accident.created}" />
-                <td width="15%" th:text="${task.user.name}" />
-            </tr>
+            <td width="10%" th:text="${accident.id}" />
+            <td width="10%" th:text="${accident.name}" />
+            <td width="40%" th:text="${accident.text}" />
+            <td width="10%" th:text="${accident.address}" />
+            <td width="15%" th:text="${accident.created}" />
+            <td width="15%" th:text="${task.user.name}" />
             </tbody>
         </table>
+    </div>
+    <div>
+        <td>
+            <a th:href="@{|/create/${accident.id}|}">
+                <button type="button" class="btn btn-primary">Редактировать</button>
+            </a>
+        </td>
     </div>
 </div>
 </body>

@@ -20,14 +20,14 @@ public class AccidentMem {
     }
 
     public void create(Accident accident) {
-
+        accidents.putIfAbsent(accident.getId(), accident);
     }
 
     public Accident findById(int id) {
-        return null;
+        return accidents.get(id);
     }
 
     public void replace(Accident accident) {
-
+        accidents.replace(accident.getId(), accident);
     }
 }

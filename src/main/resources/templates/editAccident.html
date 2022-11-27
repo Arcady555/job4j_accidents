@@ -21,7 +21,15 @@
                 <div class="navbar-nav">
                     <a class="nav-item nav-link" href="#">Главная</a>
                     <a class="nav-item nav-link" th:href="@{/accidents}">Инциденты</a>
-                    <a class="nav-item nav-link active" th:href="@{/addAccident}">Добавить Инцидент</a>
+                    <a class="nav-item nav-link active" th:href="@{/create}">Добавить Инцидент</a>
+                    <a class="nav-item nav-link" th:if="${user.name == 'Гость'}" th:href="@{/loginPage}">
+                        <span th:text="${user.name}"></span>
+                        <span> | Войти</span>
+                    </a>
+                    <a class="nav-item nav-link" th:if="${user.name != 'Гость'}" th:href="@{/logout}">
+                        <span th:text="${user.name}"></span>
+                        <span> | Выйти</span>
+                    </a>
                 </div>
             </div>
         </nav>

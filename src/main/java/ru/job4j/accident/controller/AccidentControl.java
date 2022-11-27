@@ -17,6 +17,12 @@ import ru.job4j.accident.service.AccidentService;
 public class AccidentControl {
     private final AccidentService accidents;
 
+    @GetMapping("/accident/{id}")
+    public String accidentGet(Model model, @PathVariable("id") int id) {
+        model.addAttribute("accident", accidents.findById(id));
+        return "accident";
+    }
+
     @GetMapping("/create")
     public String createAccidentGet(Model model) {
         model.addAttribute("accident", new Accident(0, "", "", null));
@@ -41,4 +47,3 @@ public class AccidentControl {
         return "redirect:/index";
     }
 }
-

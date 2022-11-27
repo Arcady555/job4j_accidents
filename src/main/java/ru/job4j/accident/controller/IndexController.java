@@ -11,7 +11,7 @@ import ru.job4j.accident.service.AccidentService;
 @AllArgsConstructor
 @ThreadSafe
 @RequestMapping("/accident")
-public class IndexControl {
+public class IndexController {
 
     private final AccidentService accidentService;
 
