@@ -2,9 +2,11 @@ package ru.job4j.accident.controller;
 
 import lombok.AllArgsConstructor;
 import net.jcip.annotations.ThreadSafe;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
 import ru.job4j.accident.model.Accident;
 import ru.job4j.accident.service.AccidentService;
 
@@ -17,9 +19,7 @@ public class AccidentControl {
 
     @GetMapping("/{id}")
     public String accidentGet(Model model, @PathVariable("id") int id) {
-        if (accidents.findById(id).isPresent()) {
-            model.addAttribute("accident", accidents.findById(id).get());
-        }
+        addAttrAccident(model, id);
         return "accident/accident";
     }
 
@@ -35,15 +35,13 @@ public class AccidentControl {
         return "redirect:/index";
     }
 
-    @GetMapping("/edit/{id}")
+    @GetMapping("/edit/{id}")  /** Лишний метод, удалить(?) в конце проекта */
     public String editAccidentGet(Model model, @PathVariable("id") int id) {
-        if (accidents.findById(id).isPresent()) {
-            model.addAttribute("accident", accidents.findById(id).get());
-        }
+        addAttrAccident(model, id);
         return "accident/editAccident";
     }
 
-    @PostMapping("/edit")
+    @PostMapping("/edit")   /** Лишний метод, удалить(?) в конце проекта */
     public String editAccidentPost(@ModelAttribute Accident accident) {
         accidents.replace(accident);
         return "redirect:/index";
@@ -51,9 +49,7 @@ public class AccidentControl {
 
     @GetMapping("/formUpdateAccident")
     public String updateGet(@RequestParam("id") int id, Model model) {
-        if (accidents.findById(id).isPresent()) {
-            model.addAttribute("accident", accidents.findById(id).get());
-        }
+        addAttrAccident(model, id);
         return "accident/formUpdateAccident";
     }
 
@@ -61,5 +57,11 @@ public class AccidentControl {
     public String updatePost(@ModelAttribute Accident accident) {
         accidents.create(accident);
         return "redirect:/index";
+    }
+
+    private void addAttrAccident(Model model, int id) {
+        accidents.findById(id).ifPresent(
+                accident -> model.addAttribute("accident", accident)
+        );
     }
 }
