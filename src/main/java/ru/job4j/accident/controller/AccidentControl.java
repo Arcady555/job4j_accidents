@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.*;
 import ru.job4j.accident.model.Accident;
 import ru.job4j.accident.service.AccidentService;
 
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.Optional;
 
 @Controller
@@ -27,24 +29,26 @@ public class AccidentControl {
 
     @GetMapping("/create")
     public String createAccidentGet(Model model) {
-        model.addAttribute("accident", new Accident(0, "", "", ""));
+        model.addAttribute("accident", new Accident(0, "", "", "", null));
         return "accident/createAccident";
     }
 
     @PostMapping("/create")
     public String createAccidentPost(@ModelAttribute Accident accident) {
+        accident.setCreated(LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS));
         accidents.create(accident);
         return "redirect:/index";
     }
 
-    @GetMapping("/formUpdateAccident")
+    @GetMapping("/update")
     public String updateGet(@RequestParam("id") int id, Model model) {
         addAttrAccident(model, id);
-        return "accident/formUpdateAccident";
+        return "accident/updateAccident";
     }
 
-    @PostMapping("/formUpdateAccident")
+    @PostMapping("/update")
     public String updatePost(@ModelAttribute Accident accident) {
+        accident.setCreated(LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS));
         accidents.create(accident);
         return "redirect:/index";
     }
@@ -54,7 +58,8 @@ public class AccidentControl {
         if (accidentOptional.isPresent()) {
             model.addAttribute("accident", accidentOptional.get());
         } else {
-            model.addAttribute("accident", new Accident(0, "", "", ""));
+            model.addAttribute("accident",
+                    new Accident(0, "", "", "", LocalDateTime.now()));
         }
     }
 }

@@ -3,6 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
@@ -21,19 +22,19 @@
         <span class="navbar-toggler-icon"></span>
     </button> -->
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div class="navbar-nav" class=" alert alert-primary">
+            <div class="navbar-nav" >
             <!--    <a class="nav-item nav-link" href="#">Главная</a>  -->
                 <a class="nav-item nav-link" th:href="@{/index}">Инциденты</a>
                 <a class="nav-item nav-link active" th:href="@{/accidents/create}">Добавить Инцидент</a>
                 <a class="nav-item nav-link" th:href="@{/registration}">Добавить пользователя</a>
-                <a class="nav-item nav-link" th:if="${user.name == 'Гость'}" th:href="@{/loginPage}">
+           <!--     <a class="nav-item nav-link" th:if="${user.name == 'Гость'}" th:href="@{/loginPage}">
                     <span th:text="${user.name}"></span>
                     <span> | Войти</span>
                 </a>
                 <a class="nav-item nav-link" th:if="${user.name != 'Гость'}" th:href="@{/logout}">
                     <span th:text="${user.name}"></span>
                     <span> | Выйти</span>
-                </a>
+                </a>  -->
             </div>
         </div>
     </nav>
@@ -46,26 +47,26 @@
                 <th scope="col">Text</th>
                 <th scope="col">Address</th>
                 <th scope="col">Дата</th>
-                <th scope="col">Пользователь</th>
+            <!--    <th scope="col">Пользователь</th> -->
+                <th scope="col">Действия</th>
             </tr>
             </thead>
             <tbody>
             <tr th:each="accident: ${accidents}">
-             <!--   <td>
-                    <a th:href="@{|/accident/${accident.id}|}">
-                        <span th:text="${accident.id}"></span>
-                    </a>
-                </td>  -->
                 <td>
-                    <a th:href="@{|accidents/formUpdateAccident?id=${accident.id}|}">
-                        <i class="fa fa-edit"></i>
+                    <a th:href="@{|/accidents/${accident.id}|}">
+                        <span th:text="${accident.id}"></span>
                     </a>
                 </td>
                 <td width="10%" th:text="${accident.name}" />
                 <td width="40%" th:text="${accident.text}" />
                 <td width="10%" th:text="${accident.address}" />
                 <td width="15%" th:text="${accident.created}" />
-                <td width="15%" th:text="${task.user.name}" />
+                <td>
+                    <a th:href="@{|/accidents/update?id=${accident.id}|}">
+                        <i class='fa fa-edit' style='color: red'></i>
+                    </a>
+                </td>
             </tr>
             </tbody>
         </table>

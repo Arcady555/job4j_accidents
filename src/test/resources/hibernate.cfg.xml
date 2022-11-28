@@ -13,6 +13,6 @@
         <property name="hibernate.show_sql">true</property>
         <property name="hibernate.dialect">org.hibernate.dialect.H2Dialect</property>
 
-  <!--      <mapping class="ru.job4j.model.User" /> -->
+        <mapping class="ru.job4j.model.Accident" />
     </session-factory>
 </hibernate-configuration>

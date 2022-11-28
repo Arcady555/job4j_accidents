@@ -11,7 +11,7 @@
             integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
             integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-    <title>Автомобильные инцеденты</title>
+    <title>Автомобильные инциденты</title>
 </head>
 <body>
 <div class="alert alert-warning">
@@ -22,29 +22,28 @@
                     <a class="nav-item nav-link" th:href="@{/index}">Инциденты</a>
                     <a class="nav-item nav-link active" th:href="@{/accidents/create}">Добавить Инцидент</a>
                     <a class="nav-item nav-link" th:href="@{/registration}">Добавить пользователя</a>
-                    <a class="nav-item nav-link" th:if="${user.name == 'Гость'}" th:href="@{/loginPage}">
+                <!--    <a class="nav-item nav-link" th:if="${user.name == 'Гость'}" th:href="@{/loginPage}">
                         <span th:text="${user.name}"></span>
                         <span> | Войти</span>
                     </a>
                     <a class="nav-item nav-link" th:if="${user.name != 'Гость'}" th:href="@{/logout}">
                         <span th:text="${user.name}"></span>
                         <span> | Выйти</span>
-                    </a>
+                    </a>  -->
                 </div>
             </div>
         </nav>
         <div class="row pt-3">
             <div class="card" style="width: 100%">
                 <div class="card-header">
-                    Редактирование инцидента.
+                    Редактирование инцидента
                 </div>
                 <div class="card-body">
-                    <form th:action="@{/accidents/edit}" method="POST" th:object="${accident}">
+                    <form th:action="@{/accidents/update}" method="POST" th:object="${accident}">
                         <input type="hidden" name="id" th:field="*{id}"/>
                         <div class="form-group">
-                            <label for="name">Имя
-                                <input type="text" size="320" class="form-control" name="name" id="name" th:field="*{name}">
-                            </label>
+                            <label for="name">Имя</label>
+                            <input type="text" class="form-control" name="name" id="name" th:field="*{name}">
                         </div>
                         <button type="submit" class="btn btn-primary">Сохранить</button>
                     </form>

@@ -13,6 +13,6 @@
         <property name="hibernate.show_sql">true</property>
         <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
 
-  <!--      <mapping class="ru.job4j.model.Task" />   -->
+        <mapping class="ru.job4j.accident.model.Accident" />
     </session-factory>
 </hibernate-configuration>

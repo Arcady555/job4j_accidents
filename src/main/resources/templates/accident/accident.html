@@ -21,19 +21,19 @@
                <span class="navbar-toggler-icon"></span>
            </button> -->
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div class="navbar-nav" class=" alert alert-primary">
+            <div class="navbar-nav">
                 <!--    <a class="nav-item nav-link" href="#">Главная</a>  -->
                 <a class="nav-item nav-link" th:href="@{/index}">Инциденты</a>
                 <a class="nav-item nav-link active" th:href="@{/accidents/create}">Добавить Инцидент</a>
                 <a class="nav-item nav-link" th:href="@{/registration}">Добавить пользователя</a>
-                <a class="nav-item nav-link" th:if="${user.name == 'Гость'}" th:href="@{/loginPage}">
+          <!--      <a class="nav-item nav-link" th:if="${user.name == 'Гость'}" th:href="@{/loginPage}">
                     <span th:text="${user.name}"></span>
                     <span> | Войти</span>
                 </a>
                 <a class="nav-item nav-link" th:if="${user.name != 'Гость'}" th:href="@{/logout}">
                     <span th:text="${user.name}"></span>
                     <span> | Выйти</span>
-                </a>
+                </a>  -->
             </div>
         </div>
     </nav>
@@ -46,7 +46,7 @@
                 <th scope="col">Text</th>
                 <th scope="col">Address</th>
                 <th scope="col">Дата</th>
-                <th scope="col">Пользователь</th>
+            <!--    <th scope="col">Пользователь</th>  -->
             </tr>
             </thead>
             <tbody>
@@ -55,13 +55,13 @@
             <td width="40%" th:text="${accident.text}" />
             <td width="10%" th:text="${accident.address}" />
             <td width="15%" th:text="${accident.created}" />
-            <td width="15%" th:text="${task.user.name}" />
+       <!--     <td width="15%" th:text="${task.user.name}" />  -->
             </tbody>
         </table>
     </div>
     <div>
         <td>
-            <a th:href="@{|/accidents/create/${accident.id}|}">
+            <a th:href="@{|/accidents/update?id=${accident.id}|}">
                 <button type="button" class="btn btn-primary">Редактировать</button>
             </a>
         </td>

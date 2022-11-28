@@ -21,7 +21,7 @@ public class AccidentMem {
     }
 
     public void create(Accident accident) {
-        accidents.putIfAbsent(accident.getId(), accident);
+        accidents.put(accident.getId(), accident);
     }
 
     public Optional<Accident> findById(int id) {
