@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.*;
 import ru.job4j.accident.model.Accident;
 import ru.job4j.accident.service.AccidentService;
 
+import java.util.Optional;
+
 @Controller
 @AllArgsConstructor
 @ThreadSafe
@@ -25,25 +27,13 @@ public class AccidentControl {
 
     @GetMapping("/create")
     public String createAccidentGet(Model model) {
-        model.addAttribute("accident", new Accident(0, "", "", null));
+        model.addAttribute("accident", new Accident(0, "", "", ""));
         return "accident/createAccident";
     }
 
     @PostMapping("/create")
     public String createAccidentPost(@ModelAttribute Accident accident) {
         accidents.create(accident);
-        return "redirect:/index";
-    }
-
-    @GetMapping("/edit/{id}")  /** Лишний метод, удалить(?) в конце проекта */
-    public String editAccidentGet(Model model, @PathVariable("id") int id) {
-        addAttrAccident(model, id);
-        return "accident/editAccident";
-    }
-
-    @PostMapping("/edit")   /** Лишний метод, удалить(?) в конце проекта */
-    public String editAccidentPost(@ModelAttribute Accident accident) {
-        accidents.replace(accident);
         return "redirect:/index";
     }
 
@@ -60,8 +50,11 @@ public class AccidentControl {
     }
 
     private void addAttrAccident(Model model, int id) {
-        accidents.findById(id).ifPresent(
-                accident -> model.addAttribute("accident", accident)
-        );
+        Optional<Accident> accidentOptional = accidents.findById(id);
+        if (accidentOptional.isPresent()) {
+            model.addAttribute("accident", accidentOptional.get());
+        } else {
+            model.addAttribute("accident", new Accident(0, "", "", ""));
+        }
     }
 }
