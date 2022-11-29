@@ -23,8 +23,9 @@ public class AccidentControl {
 
     @GetMapping("/{id}")
     public String accidentGet(Model model, @PathVariable("id") int id) {
-        addAttrAccident(model, id);
-        return "accident/accident";
+        String rsl = "accident/accident";
+        addAttrAccident(model, id, rsl);
+        return rsl;
     }
 
     @GetMapping("/create")
@@ -42,8 +43,9 @@ public class AccidentControl {
 
     @GetMapping("/update")
     public String updateGet(@RequestParam("id") int id, Model model) {
-        addAttrAccident(model, id);
-        return "accident/updateAccident";
+        String rsl = "accident/updateAccident";
+        addAttrAccident(model, id, rsl);
+        return rsl;
     }
 
     @PostMapping("/update")
@@ -53,13 +55,17 @@ public class AccidentControl {
         return "redirect:/index";
     }
 
-    private void addAttrAccident(Model model, int id) {
+    @PostMapping("/page_not_found")
+    public String pageNotFound() {
+        return "pageNotFound";
+    }
+
+    private void addAttrAccident(Model model, int id, String str) {
         Optional<Accident> accidentOptional = accidents.findById(id);
         if (accidentOptional.isPresent()) {
             model.addAttribute("accident", accidentOptional.get());
         } else {
-            model.addAttribute("accident",
-                    new Accident(0, "", "", "", LocalDateTime.now()));
+            str = "redirect:/page_not_found";
         }
     }
 }
