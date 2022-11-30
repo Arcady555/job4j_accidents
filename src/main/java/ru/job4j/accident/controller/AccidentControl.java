@@ -62,7 +62,7 @@ public class AccidentControl {
         return "redirect:/index";
     }
 
-    @PostMapping("/page-not-found")
+    @GetMapping("/page-not-found")
     public String pageNotFound() {
         return "pageNotFound";
     }
