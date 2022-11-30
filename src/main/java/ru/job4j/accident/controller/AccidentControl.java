@@ -8,10 +8,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import ru.job4j.accident.model.Accident;
+import ru.job4j.accident.model.AccidentType;
 import ru.job4j.accident.service.AccidentService;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -30,13 +33,18 @@ public class AccidentControl {
 
     @GetMapping("/create")
     public String createAccidentGet(Model model) {
-        model.addAttribute("accident", new Accident(0, "", "", "", null));
+        List<AccidentType> types = new ArrayList<>();
+        types.add(new AccidentType(1, "Две машины"));
+        types.add(new AccidentType(2, "Машина и человек"));
+        types.add(new AccidentType(3, "Машина и велосипед"));
+        model.addAttribute("types", types);
+        model.addAttribute("accident",
+                new Accident(0, "", "", "", null, null));
         return "accident/createAccident";
     }
 
     @PostMapping("/create")
     public String createAccidentPost(@ModelAttribute Accident accident) {
-        accident.setCreated(LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS));
         accidents.create(accident);
         return "redirect:/index";
     }
@@ -50,7 +58,6 @@ public class AccidentControl {
 
     @PostMapping("/update")
     public String updatePost(@ModelAttribute Accident accident) {
-        accident.setCreated(LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS));
         accidents.create(accident);
         return "redirect:/index";
     }

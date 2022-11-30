@@ -25,12 +25,7 @@ public class AccidentMem {
     }
 
     public Optional<Accident> findById(int id) {
-        Optional<Accident> rsl = Optional.empty();
-        Accident accident = accidents.get(id);
-        if (accident != null) {
-            rsl = Optional.of(accident);
-        }
-        return rsl;
+        return Optional.ofNullable(accidents.get(id));
     }
 
     public void replace(Accident accident) {
