@@ -11,9 +11,6 @@ import ru.job4j.accident.model.Accident;
 import ru.job4j.accident.model.AccidentType;
 import ru.job4j.accident.service.AccidentService;
 
-import java.time.LocalDateTime;
-import java.time.temporal.ChronoUnit;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,6 +19,12 @@ import java.util.Optional;
 @ThreadSafe
 @RequestMapping("/accidents")
 public class AccidentControl {
+    private final static List<AccidentType> TYPE_LIST = List.of(
+            new AccidentType(0, "Две машины"),
+            new AccidentType(1, "Машина и человек"),
+            new AccidentType(2, "Машина и велосипед")
+    );
+    private static int createId = 0;
     private final AccidentService accidents;
 
     @GetMapping("/{id}")
@@ -33,11 +36,7 @@ public class AccidentControl {
 
     @GetMapping("/create")
     public String createAccidentGet(Model model) {
-        List<AccidentType> types = new ArrayList<>();
-        types.add(new AccidentType(1, "Две машины"));
-        types.add(new AccidentType(2, "Машина и человек"));
-        types.add(new AccidentType(3, "Машина и велосипед"));
-        model.addAttribute("types", types);
+        model.addAttribute("types", TYPE_LIST);
         model.addAttribute("accident",
                 new Accident(0, "", "", "", null, null));
         return "accident/createAccident";
@@ -45,12 +44,15 @@ public class AccidentControl {
 
     @PostMapping("/create")
     public String createAccidentPost(@ModelAttribute Accident accident) {
+        accident.setId(createId++);
+        accident.setType(TYPE_LIST.get(accident.getType().getId()));
         accidents.create(accident);
         return "redirect:/index";
     }
 
     @GetMapping("/update")
     public String updateGet(@RequestParam("id") int id, Model model) {
+        model.addAttribute("types", TYPE_LIST);
         String rsl = "accident/updateAccident";
         addAttrAccident(model, id, rsl);
         return rsl;
@@ -58,6 +60,7 @@ public class AccidentControl {
 
     @PostMapping("/update")
     public String updatePost(@ModelAttribute Accident accident) {
+        accident.setType(TYPE_LIST.get(accident.getType().getId()));
         accidents.create(accident);
         return "redirect:/index";
     }
