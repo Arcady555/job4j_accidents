@@ -62,7 +62,7 @@ public class AccidentControl {
         return "redirect:/index";
     }
 
-    @PostMapping("/page_not_found")
+    @PostMapping("/page-not-found")
     public String pageNotFound() {
         return "pageNotFound";
     }
@@ -72,7 +72,7 @@ public class AccidentControl {
         if (accidentOptional.isPresent()) {
             model.addAttribute("accident", accidentOptional.get());
         } else {
-            str = "redirect:/page_not_found";
+            str = "redirect:/page-not-found";
         }
     }
 }
