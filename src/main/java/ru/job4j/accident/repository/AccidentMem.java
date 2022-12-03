@@ -4,16 +4,16 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
 import ru.job4j.accident.model.Accident;
 import net.jcip.annotations.ThreadSafe;
+import ru.job4j.accident.model.AccidentType;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
 
 @Repository
 @AllArgsConstructor
 @ThreadSafe
 public class AccidentMem {
+    private final AtomicInteger atomicId = new AtomicInteger(0);
     private final Map<Integer, Accident> accidents = new HashMap<>();
 
     public Collection<Accident> findAll() {
@@ -21,14 +21,15 @@ public class AccidentMem {
     }
 
     public void create(Accident accident) {
-        accidents.put(accident.getId(), accident);
+            accident.setId(atomicId.incrementAndGet());
+            accidents.put(accident.getId(), accident);
     }
 
     public Optional<Accident> findById(int id) {
         return Optional.ofNullable(accidents.get(id));
     }
 
-    public void replace(Accident accident) {
+    public void update(Accident accident) {
         accidents.replace(accident.getId(), accident);
     }
 }
