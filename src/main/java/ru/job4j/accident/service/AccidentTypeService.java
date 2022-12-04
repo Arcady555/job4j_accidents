@@ -4,26 +4,27 @@ import net.jcip.annotations.ThreadSafe;
 import org.springframework.stereotype.Service;
 import ru.job4j.accident.model.AccidentType;
 
-import java.util.List;
+import java.util.Collection;
+import java.util.Map;
 
 @Service
 @ThreadSafe
 public class AccidentTypeService {
-    private final List<AccidentType> list;
+    private final Map<Integer, AccidentType> types;
 
     public AccidentTypeService() {
-        this.list = List.of(
-                new AccidentType(0, "Две машины"),
-                new AccidentType(1, "Машина и человек"),
-                new AccidentType(2, "Машина и велосипед")
+        this.types = Map.of(
+                0, new AccidentType(0, "Две машины"),
+                1, new AccidentType(1, "Машина и человек"),
+                2, new AccidentType(2, "Машина и велосипед")
         );
     }
 
-    public List<AccidentType> findAll() {
-        return list;
+    public Collection<AccidentType> findAll() {
+        return types.values();
     }
 
     public AccidentType get(int id) {
-        return list.get(id);
+        return types.get(id);
     }
 }
