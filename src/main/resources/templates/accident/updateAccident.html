@@ -51,6 +51,9 @@
                             <label for="name">Имя</label>
                             <input type="text" class="form-control" name="name" id="name" th:field="*{name}">
                         </div>
+                        <select class="form-control" id="rIds" name="rIds"  multiple>
+                            <option th:each="rule : ${rules}" th:value="${rule.id}"  th:text="${rule.name}"></option>
+                        </select>
                         <button type="submit" class="btn btn-primary">Сохранить</button>
                     </form>
                 </div>

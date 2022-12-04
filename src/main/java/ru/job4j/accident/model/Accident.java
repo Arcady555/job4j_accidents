@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 @Data
 @AllArgsConstructor
@@ -23,4 +25,5 @@ public class Accident {
     private String address;
     private LocalDateTime created;
     private AccidentType type;
+    private Set<Rule> rules = new HashSet<>();
 }
