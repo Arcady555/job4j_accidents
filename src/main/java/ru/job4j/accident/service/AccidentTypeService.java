@@ -14,9 +14,9 @@ public class AccidentTypeService {
 
     public AccidentTypeService() {
         this.types = Map.of(
-                0, new AccidentType(0, "Две машины"),
-                1, new AccidentType(1, "Машина и человек"),
-                2, new AccidentType(2, "Машина и велосипед")
+                1, new AccidentType(1, "Две машины"),
+                2, new AccidentType(2, "Машина и человек"),
+                3, new AccidentType(3, "Машина и велосипед")
         );
     }
 
