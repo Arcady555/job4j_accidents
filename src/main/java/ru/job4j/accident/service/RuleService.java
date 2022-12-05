@@ -2,11 +2,11 @@ package ru.job4j.accident.service;
 
 import net.jcip.annotations.ThreadSafe;
 import org.springframework.stereotype.Service;
+import ru.job4j.accident.model.Accident;
 import ru.job4j.accident.model.Rule;
 
-import java.util.Collection;
-import java.util.Map;
-import java.util.Optional;
+import javax.servlet.http.HttpServletRequest;
+import java.util.*;
 
 @Service
 @ThreadSafe
@@ -27,5 +27,24 @@ public class RuleService {
 
     public Optional<Rule> findById(int key) {
         return Optional.ofNullable(rules.get(key));
+    }
+
+    public void toSetRules(Accident accident, HttpServletRequest req) {
+        Set<Rule> set = new HashSet<>();
+        String[] ids = req.getParameterValues("rIds");
+        if (ids != null) {
+            for (String str : ids) {
+                Optional<Rule> ruleOptional = findById(Integer.parseInt(str));
+                if (ruleOptional.isPresent()) {
+                    Rule rule = ruleOptional.get();
+                    set.add(rule);
+                } else {
+                    throw new IllegalArgumentException();
+                }
+            }
+        } else {
+            throw new IllegalArgumentException();
+        }
+        accident.setRules(set);
     }
 }

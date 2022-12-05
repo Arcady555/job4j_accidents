@@ -8,15 +8,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import ru.job4j.accident.model.Accident;
-import ru.job4j.accident.model.Rule;
 import ru.job4j.accident.service.AccidentService;
 import ru.job4j.accident.service.AccidentTypeService;
 import ru.job4j.accident.service.RuleService;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.HashSet;
 import java.util.Optional;
-import java.util.Set;
 
 @Controller
 @AllArgsConstructor
@@ -45,7 +42,11 @@ public class AccidentControl {
 
     @PostMapping("/create")
     public String createAccidentPost(@ModelAttribute Accident accident, HttpServletRequest req) {
-        toSetRules(accident, req);
+        try {
+            rules.toSetRules(accident, req);
+        } catch (IllegalArgumentException e) {
+            return "redirect:/accidents/set-rule";
+        }
         accident.setType(types.get(accident.getType().getId()));
         accidents.create(accident);
         return "redirect:/index";
@@ -62,7 +63,11 @@ public class AccidentControl {
 
     @PostMapping("/update")
     public String updatePost(@ModelAttribute Accident accident, HttpServletRequest req) {
-        toSetRules(accident, req);
+        try {
+            rules.toSetRules(accident, req);
+        } catch (IllegalArgumentException e) {
+            return "redirect:/accidents/set-rule";
+        }
         accident.setType(types.get(accident.getType().getId()));
         accidents.update(accident);
         return "redirect:/index";
@@ -73,31 +78,17 @@ public class AccidentControl {
         return "pageNotFound";
     }
 
+    @GetMapping("/set-rule")
+    public String withoutRule() {
+        return "setRule";
+    }
+
     private void addAttrAccident(Model model, int id, String str) {
         Optional<Accident> accidentOptional = accidents.findById(id);
         if (accidentOptional.isPresent()) {
             model.addAttribute("accident", accidentOptional.get());
         } else {
-            str = "redirect:/page-not-found";
+            str = "redirect:/accidents/page-not-found";
         }
-    }
-
-    private void toSetRules(Accident accident, HttpServletRequest req) {
-        Set<Rule> set = new HashSet<>();
-        String[] ids = req.getParameterValues("rIds");
-        if (ids != null) {
-            for (String str : ids) {
-                Optional<Rule> ruleOptional = rules.findById(Integer.parseInt(str));
-                if (ruleOptional.isPresent()) {
-                    Rule rule = ruleOptional.get();
-                    set.add(rule);
-                } else {
-                    set.add(new Rule(0, ""));
-                }
-            }
-        } else {
-            set.add(new Rule(0, ""));
-        }
-        accident.setRules(set);
     }
 }
