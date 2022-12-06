@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import net.jcip.annotations.ThreadSafe;
 import org.springframework.stereotype.Service;
 import ru.job4j.accident.model.Accident;
-import ru.job4j.accident.repository.AccidentMem;
+import ru.job4j.accident.repository.AccidentJdbcTemplate;
 
 import java.util.Collection;
 import java.util.Optional;
@@ -13,21 +13,21 @@ import java.util.Optional;
 @AllArgsConstructor
 @ThreadSafe
 public class AccidentService {
-    private final AccidentMem accidentMem;
+    private final AccidentJdbcTemplate accidents;
 
     public Collection<Accident> findAll() {
-        return accidentMem.findAll();
+        return accidents.findAll();
     }
 
     public void create(Accident accident) {
-        accidentMem.create(accident);
+        accidents.create(accident);
     }
 
     public Optional<Accident> findById(int id) {
-        return accidentMem.findById(id);
+        return accidents.findById(id);
     }
 
     public void update(Accident accident) {
-        accidentMem.update(accident);
+        accidents.update(accident);
     }
 }
