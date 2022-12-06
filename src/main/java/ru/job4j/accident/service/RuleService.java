@@ -43,7 +43,7 @@ public class RuleService {
                 }
             }
         }
-   //     accident.setRules(set);
+   /**     accident.setRules(set);   */
         return rsl;
     }
 }
