@@ -1,4 +1,6 @@
 CREATE TABLE IF NOT EXISTS accidents (
    id SERIAL PRIMARY KEY,
-   name VARCHAR
+   name VARCHAR,
+   text VARCHAR,
+   address VARCHAR
 );

@@ -45,10 +45,10 @@
                 <th scope="col">#</th>
              <!--   <th scope="col">Тип</th>  -->
                 <th scope="col">Имя</th>
-           <!--     <th scope="col">Статья</th>
+           <!--     <th scope="col">Статья</th> -->
                 <th scope="col">Текст</th>
                 <th scope="col">Адрес</th>
-                <th scope="col">Дата</th>
+           <!--     <th scope="col">Дата</th>
                 <th scope="col">Пользователь</th> -->
                 <th scope="col">Действия</th>
             </tr>
@@ -62,10 +62,10 @@
                 </td>
           <!--      <td width="15%" th:text="${accident.type.name}" />  -->
                 <td width="10%" th:text="${accident.name}" />
-            <!--    <td width="20%" th:text="${accident.rules}" />
+            <!--    <td width="20%" th:text="${accident.rules}" /> -->
                 <td width="30%" th:text="${accident.text}" />
                 <td width="10%" th:text="${accident.address}" />
-                <td width="15%" th:text="${accident.created}" />  -->
+           <!--     <td width="15%" th:text="${accident.created}" />  -->
                 <td>
                     <a th:href="@{|/accidents/update?id=${accident.id}|}">
                         <i class='fa fa-edit' style='color: red'></i>

@@ -41,25 +41,33 @@
       <div class="card-body">
         <form th:action="@{/accidents/create}" method="POST" enctype="multipart/form-data">
           <input type="hidden" name="id" value="0"/>
-          <div class="form-group">
+       <!--   <div class="form-group">
             <label for="type.id">Тип</label>
             <select class="form-control" id="type.id"  name="type.id">
               <option th:each="type: ${types}"
                       th:text="${type.name}"
                       th:value="${type.id}"></option>
             </select>
-          </div>
+          </div>   -->
           <div class="form-group">
             <label for="name">Имя</label>
             <input type="text" class="form-control" name="name" id="name">
           </div>
-          <div class="form-group">
+         <!-- <div class="form-group">
             <label for="type.id" name="rIds">Статья</label>
             <select class="form-control" id="rIds" name="rIds" multiple>
               <option th:each="rule: ${rules}"
                       th:text="${rule.name}"
                       th:value="${rule.id}"></option>
             </select>
+          </div>  -->
+          <div class="form-group">
+            <label for="name">Текст</label>
+            <input type="text" class="form-control" name="text" id="text">
+          </div>
+          <div class="form-group">
+            <label for="name">Адрес</label>
+            <input type="text" class="form-control" name="address" id="address">
           </div>
           <button type="submit" class="btn btn-primary mt-3">Сохранить</button>
         </form>
