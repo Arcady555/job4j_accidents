@@ -42,9 +42,7 @@ public class AccidentControl {
 
     @PostMapping("/create")
     public String createAccidentPost(@ModelAttribute Accident accident, HttpServletRequest req) {
-        try {
-            rules.toSetRules(accident, req);
-        } catch (IllegalArgumentException e) {
+        if (!rules.toSetRules(accident, req)) {
             return "redirect:/accidents/set-rule";
         }
         accident.setType(types.get(accident.getType().getId()));
@@ -63,9 +61,7 @@ public class AccidentControl {
 
     @PostMapping("/update")
     public String updatePost(@ModelAttribute Accident accident, HttpServletRequest req) {
-        try {
-            rules.toSetRules(accident, req);
-        } catch (IllegalArgumentException e) {
+        if (!rules.toSetRules(accident, req)) {
             return "redirect:/accidents/set-rule";
         }
         accident.setType(types.get(accident.getType().getId()));

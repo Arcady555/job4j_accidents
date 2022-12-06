@@ -29,7 +29,8 @@ public class RuleService {
         return Optional.ofNullable(rules.get(key));
     }
 
-    public void toSetRules(Accident accident, HttpServletRequest req) {
+    public boolean toSetRules(Accident accident, HttpServletRequest req) {
+        boolean rsl = false;
         Set<Rule> set = new HashSet<>();
         String[] ids = req.getParameterValues("rIds");
         if (ids != null) {
@@ -38,13 +39,11 @@ public class RuleService {
                 if (ruleOptional.isPresent()) {
                     Rule rule = ruleOptional.get();
                     set.add(rule);
-                } else {
-                    throw new IllegalArgumentException();
+                    rsl = true;
                 }
             }
-        } else {
-            throw new IllegalArgumentException();
         }
         accident.setRules(set);
+        return rsl;
     }
 }
