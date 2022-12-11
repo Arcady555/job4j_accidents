@@ -1,49 +1,31 @@
 package ru.job4j.accident.service;
 
+import lombok.AllArgsConstructor;
 import net.jcip.annotations.ThreadSafe;
 import org.springframework.stereotype.Service;
 import ru.job4j.accident.model.Accident;
 import ru.job4j.accident.model.Rule;
+import ru.job4j.accident.repository.jdbcstore.RuleStore;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.*;
+import java.util.Collection;
+import java.util.Optional;
 
+@AllArgsConstructor
 @Service
 @ThreadSafe
 public class RuleService {
-    private final Map<Integer, Rule> rules;
-
-    public RuleService(Map<Integer, Rule> rules) {
-        this.rules = Map.of(
-                1, new Rule(1, "Статья. 1"),
-                2, new Rule(2, "Статья. 2"),
-                3, new Rule(3, "Статья. 3")
-        );
-    }
+    private final RuleStore rules;
 
     public Collection<Rule> findAll() {
-        return rules.values();
+        return rules.findAll();
     }
 
-    public Optional<Rule> findById(int key) {
-        return Optional.ofNullable(rules.get(key));
+    public Optional<Rule> findById(int id) {
+        return rules.findById(id);
     }
 
     public boolean toSetRules(Accident accident, HttpServletRequest req) {
-        boolean rsl = false;
-        Set<Rule> set = new HashSet<>();
-        String[] ids = req.getParameterValues("rIds");
-        if (ids != null) {
-            for (String str : ids) {
-                Optional<Rule> ruleOptional = findById(Integer.parseInt(str));
-                if (ruleOptional.isPresent()) {
-                    Rule rule = ruleOptional.get();
-                    set.add(rule);
-                    rsl = true;
-                }
-            }
-        }
-   /**     accident.setRules(set);   */
-        return rsl;
+        return rules.toSetRules(accident, req);
     }
 }

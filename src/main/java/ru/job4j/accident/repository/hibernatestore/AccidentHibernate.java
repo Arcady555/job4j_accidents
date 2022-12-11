@@ -1,22 +1,24 @@
-package ru.job4j.accident.repository;
+package ru.job4j.accident.repository.hibernatestore;
 
 import lombok.AllArgsConstructor;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.springframework.stereotype.Repository;
+import org.hibernate.Transaction;
 import ru.job4j.accident.model.Accident;
 
 import java.util.List;
 import java.util.Optional;
 
-@Repository
+//@Repository
 @AllArgsConstructor
 public class AccidentHibernate {
     private final SessionFactory sf;
 
     public Accident create(Accident accident) {
         try (Session session = sf.openSession()) {
+            Transaction t = session.beginTransaction();
             session.save(accident);
+            t.commit();
             return accident;
         }
     }
@@ -40,7 +42,9 @@ public class AccidentHibernate {
 
     public void update(Accident accident) {
         try (Session session = sf.openSession()) {
+            Transaction t = session.beginTransaction();
             session.merge(accident);
+            t.commit();
         }
     }
 }
