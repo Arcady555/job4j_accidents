@@ -65,7 +65,7 @@ public class AccidentControl {
             return "redirect:/accidents/set-rule";
         }
         accident.setType(types.get(accident.getType().getId()).get());
-        System.out.println(accident.getType());  /////////////////////////////
+        System.out.println(accident.getType());
         accidents.update(accident);
         return "redirect:/index";
     }
