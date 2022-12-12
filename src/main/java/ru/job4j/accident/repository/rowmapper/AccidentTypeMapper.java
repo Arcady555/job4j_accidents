@@ -1,4 +1,4 @@
-package ru.job4j.accident.repository.jdbcstore.rowmapper;
+package ru.job4j.accident.repository.rowmapper;
 
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
@@ -13,8 +13,8 @@ public class AccidentTypeMapper implements RowMapper<AccidentType> {
     @Override
     public AccidentType mapRow(ResultSet rs, int rowNum) throws SQLException {
         AccidentType accidentType = new AccidentType();
-        accidentType.setId(rs.getInt("id"));
-        accidentType.setName(rs.getString("name"));
+        accidentType.setId(rs.getInt("type_id"));
+        accidentType.setName(rs.getString("type_name"));
         return accidentType;
     }
 }

@@ -1,13 +1,16 @@
-package ru.job4j.accident.repository.jdbcstore;
+package ru.job4j.accident.repository;
 
 import lombok.AllArgsConstructor;
 import net.jcip.annotations.ThreadSafe;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import ru.job4j.accident.model.Accident;
-import ru.job4j.accident.repository.jdbcstore.rowmapper.AccidentMapper;
+import ru.job4j.accident.repository.resultsetextractor.RuleExtractor;
+import ru.job4j.accident.repository.rowmapper.AccidentMapper;
 
 import java.util.Collection;
+import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Repository
@@ -18,8 +21,8 @@ public class AccidentJdbcTemplate {
     private final AccidentMapper accidentRowMapper;
 
     public Accident create(Accident accident) {
-        jdbc.update("insert into accident (type, name, text, address) values (?, ?, ?, ?)",
-                accident.getType(),
+        jdbc.update("insert into accident (type_id, name, text, address) values (?, ?, ?, ?)",
+                accident.getType().getId(),
                 accident.getName(),
                 accident.getText(),
                 accident.getAddress());
@@ -27,30 +30,33 @@ public class AccidentJdbcTemplate {
     }
 
     public Collection<Accident> findAll() {
-        return jdbc.query("select  distinct "
+        return jdbc.query("select "
                         + "accident.id, "
-                        + "accident.type, "
+                        + "accident.type_id, "
                         + "accident.name, "
-                        + "rule.rule_id, "
                         + "accident.text, "
                         + "accident.address, "
                         + "accident.created, "
-                        + "type.type_name, "
-                        + "rule.rule_name, "
-                        + "accident_rule.accident_id, "
-                        + "accident_rule.rule_id "
+                        + "type.type_name "
                         + "from accident "
-                        + "inner join type on accident.type=type.type_id "
-                        + "inner join accident_rule on accident.id=accident_rule.accident_id "
-                        + "inner join rule on accident_rule.rule_id=rule.rule_id ",
+                        + "inner join type on accident.type_id=type.type_id ",
                 accidentRowMapper
         );
     }
 
     public Optional<Accident> findById(int id) {
-        return Optional.ofNullable(jdbc.queryForObject("select * from accident LEFT OUTER JOIN accident_rule "
-                + "ON accident.ID = accident_rule.accident_id "
-                + "LEFT OUTER JOIN rule  ON accident_rule.rule_id = rule.ID where id=?", accidentRowMapper, id));
+        return Optional.ofNullable(jdbc.queryForObject("select "
+                        + "accident.id, "
+                        + "accident.type_id, "
+                        + "accident.name, "
+                        + "accident.text, "
+                        + "accident.address, "
+                        + "accident.created, "
+                        + "type.type_name "
+                        + "from accident "
+                        + "inner join type on accident.type_id=type.type_id "
+                        + "where id=?",
+                accidentRowMapper, id));
     }
 
     public Accident update(Accident accident) {

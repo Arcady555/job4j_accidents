@@ -8,12 +8,15 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import ru.job4j.accident.model.Accident;
+import ru.job4j.accident.model.Rule;
 import ru.job4j.accident.service.AccidentService;
 import ru.job4j.accident.service.AccidentTypeService;
 import ru.job4j.accident.service.RuleService;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.HashSet;
 import java.util.Optional;
+import java.util.Set;
 
 @Controller
 @AllArgsConstructor
@@ -46,6 +49,10 @@ public class AccidentControl {
             return "redirect:/accidents/set-rule";
         }
         accident.setType(types.get(accident.getType().getId()).get());
+      /*  Rule rule = new Rule();
+        rule.setId(4);
+        rule.setName("Cnfnmmz 4");
+        accident.setRules(Set.of(rule)); */
         accidents.create(accident);
         return "redirect:/index";
     }
@@ -65,7 +72,6 @@ public class AccidentControl {
             return "redirect:/accidents/set-rule";
         }
         accident.setType(types.get(accident.getType().getId()).get());
-        System.out.println(accident.getType());
         accidents.update(accident);
         return "redirect:/index";
     }
