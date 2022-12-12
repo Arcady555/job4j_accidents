@@ -36,16 +36,16 @@ public class AccidentControl {
         model.addAttribute("rules", rules.findAll());
         model.addAttribute("types", types.findAll());
         model.addAttribute("accident",
-                new Accident(0, "", "", ""));
+                new Accident(0, "", "", "", null, null));
         return "accident/createAccident";
     }
 
     @PostMapping("/create")
     public String createAccidentPost(@ModelAttribute Accident accident, HttpServletRequest req) {
-       /** if (!rules.toSetRules(accident, req)) {
+        if (!rules.toSetRules(accident, req)) {
             return "redirect:/accidents/set-rule";
         }
-        accident.setType(types.get(accident.getType().getId())); */
+        accident.setType(types.get(accident.getType().getId()));
         accidents.create(accident);
         return "redirect:/index";
     }
@@ -61,15 +61,11 @@ public class AccidentControl {
 
     @PostMapping("/update")
     public String updatePost(@ModelAttribute Accident accident, HttpServletRequest req) {
-      /**  if (!rules.toSetRules(accident, req)) {
+        if (!rules.toSetRules(accident, req)) {
             return "redirect:/accidents/set-rule";
         }
-        accident.setType(types.get(accident.getType().getId())); */
-        System.out.println(accident.getName());
-        System.out.println(accident.getId());
+        accident.setType(types.get(accident.getType().getId()));
         accidents.update(accident);
-        System.out.println(accident.getName());
-        System.out.println(accident.getId());
         return "redirect:/index";
     }
 
