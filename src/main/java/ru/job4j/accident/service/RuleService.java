@@ -36,11 +36,12 @@ public class RuleService {
         if (ids != null) {
             for (String str : ids) {
                 Optional<Rule> ruleOptional = findById(Integer.parseInt(str));
-                if (ruleOptional.isPresent()) {
-                    Rule rule = ruleOptional.get();
-                    set.add(rule);
-                    rsl = true;
+                if(ruleOptional.isEmpty()) {
+                    return false;
                 }
+                Rule rule = ruleOptional.get();
+                set.add(rule);
+                rsl = true;
             }
         }
         accident.setRules(set);
