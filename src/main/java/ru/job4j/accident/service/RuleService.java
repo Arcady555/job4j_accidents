@@ -36,7 +36,7 @@ public class RuleService {
         if (ids != null) {
             for (String str : ids) {
                 Optional<Rule> ruleOptional = findById(Integer.parseInt(str));
-                if(ruleOptional.isEmpty()) {
+                if (ruleOptional.isEmpty()) {
                     return false;
                 }
                 Rule rule = ruleOptional.get();
