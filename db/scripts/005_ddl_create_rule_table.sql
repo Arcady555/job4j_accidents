@@ -1,0 +1,4 @@
+CREATE TABLE IF NOT EXISTS rule (
+   rule_id SERIAL PRIMARY KEY,
+   rule_name VARCHAR
+);
