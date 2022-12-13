@@ -1,32 +1,26 @@
 package ru.job4j.accident.service;
 
+import lombok.AllArgsConstructor;
 import net.jcip.annotations.ThreadSafe;
 import org.springframework.stereotype.Service;
 import ru.job4j.accident.model.Accident;
 import ru.job4j.accident.model.Rule;
+import ru.job4j.accident.repository.RuleStore;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.*;
 
 @Service
 @ThreadSafe
+@AllArgsConstructor
 public class RuleService {
-    private final Map<Integer, Rule> rules;
-
-    public RuleService(Map<Integer, Rule> rules) {
-        this.rules = Map.of(
-                1, new Rule(1, "Статья. 1"),
-                2, new Rule(2, "Статья. 2"),
-                3, new Rule(3, "Статья. 3")
-        );
-    }
-
+    private RuleStore ruleStore;
     public Collection<Rule> findAll() {
-        return rules.values();
+        return ruleStore.findAll();
     }
 
     public Optional<Rule> findById(int key) {
-        return Optional.ofNullable(rules.get(key));
+        return ruleStore.findById(key);
     }
 
     public boolean toSetRules(Accident accident, HttpServletRequest req) {
@@ -43,7 +37,7 @@ public class RuleService {
                 }
             }
         }
-   /**     accident.setRules(set);   */
+        accident.setRules(set);
         return rsl;
     }
 }

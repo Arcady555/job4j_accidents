@@ -1,5 +1,6 @@
 package ru.job4j.accident.service;
 
+import lombok.AllArgsConstructor;
 import net.jcip.annotations.ThreadSafe;
 import org.springframework.stereotype.Service;
 import ru.job4j.accident.model.AccidentType;
