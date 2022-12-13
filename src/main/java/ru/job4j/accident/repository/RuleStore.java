@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 import ru.job4j.accident.model.Accident;
 import ru.job4j.accident.model.Rule;
 import ru.job4j.accident.repository.resultsetextractor.RuleExtractor;
+import ru.job4j.accident.repository.rowmapper.AccidentMapper;
 import ru.job4j.accident.repository.rowmapper.RuleMapper;
 
 import javax.servlet.http.HttpServletRequest;
@@ -19,6 +20,7 @@ public class RuleStore {
     private final JdbcTemplate jdbc;
     private final RuleMapper rowMapper;
     private final RuleExtractor ruleExtractor;
+    private final AccidentMapper accidentMapper;
 
     public Collection<Rule> findAll() {
         return jdbc.query("select * from rule", rowMapper);
@@ -48,13 +50,16 @@ public class RuleStore {
         Set<Rule> set = new HashSet<>();
         String[] ids = req.getParameterValues("rIds");
         if (ids != null) {
+            jdbc.update("delete from accident_rule where accident_id=?",
+                    accident.getId());
             for (String str : ids) {
-                Optional<Rule> ruleOptional = findById(Integer.parseInt(str));
-                if(ruleOptional.isEmpty()) {
+                int ruleId = Integer.parseInt(str);
+                if (findById(ruleId).isEmpty()) {
                     return false;
                 }
-                Rule rule = ruleOptional.get();
-                set.add(rule);
+                jdbc.update("insert into accident_rule (accident_id, rule_id) values (?, ?)",
+                        accident.getId(),
+                        ruleId);
                 rsl = true;
             }
         }

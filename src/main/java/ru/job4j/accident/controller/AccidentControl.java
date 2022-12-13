@@ -45,15 +45,11 @@ public class AccidentControl {
 
     @PostMapping("/create")
     public String createAccidentPost(@ModelAttribute Accident accident, HttpServletRequest req) {
+        int id = accidents.create(accident);
+        accident.setId(id);
         if (!rules.toSetRules(accident, req)) {
             return "redirect:/accidents/set-rule";
         }
-        accident.setType(types.get(accident.getType().getId()).get());
-      /*  Rule rule = new Rule();
-        rule.setId(4);
-        rule.setName("Cnfnmmz 4");
-        accident.setRules(Set.of(rule)); */
-        accidents.create(accident);
         return "redirect:/index";
     }
 
@@ -71,7 +67,6 @@ public class AccidentControl {
         if (!rules.toSetRules(accident, req)) {
             return "redirect:/accidents/set-rule";
         }
-        accident.setType(types.get(accident.getType().getId()).get());
         accidents.update(accident);
         return "redirect:/index";
     }

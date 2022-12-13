@@ -20,10 +20,8 @@ public class AccidentService {
     private final AccidentJdbcTemplate accidents;
     private final RuleStore ruleStore;
 
-    public Accident create(Accident accident) {
-        Accident accident1 = accidents.create(accident);
-        //accident.setRules();
-        return accident;
+    public int create(Accident accident) {
+        return accidents.create(accident);
     }
 
     public Collection<Accident> findAll() {
