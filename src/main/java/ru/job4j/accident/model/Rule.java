@@ -18,10 +18,10 @@ import java.util.Set;
 public class Rule {
     @Id
     @EqualsAndHashCode.Include
-    @Column(name="rule_id")
+    @Column(name = "rule_id")
     private int id;
 
-    @Column(name="rule_name")
+    @Column(name = "rule_name")
     private String name;
 
     @ManyToMany(mappedBy = "rules")

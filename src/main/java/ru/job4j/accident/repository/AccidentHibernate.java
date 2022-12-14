@@ -1,6 +1,7 @@
 package ru.job4j.accident.repository;
 
 import lombok.AllArgsConstructor;
+import net.jcip.annotations.ThreadSafe;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
@@ -11,12 +12,15 @@ import java.util.Optional;
 
 @Repository
 @AllArgsConstructor
+@ThreadSafe
 public class AccidentHibernate {
     private final SessionFactory sf;
 
     public Accident create(Accident accident) {
         try (Session session = sf.openSession()) {
+            session.beginTransaction();
             session.save(accident);
+            session.getTransaction().commit();
             return accident;
         }
     }
@@ -24,7 +28,8 @@ public class AccidentHibernate {
     public List<Accident> findAll() {
         try (Session session = sf.openSession()) {
             return session
-                    .createQuery("from Accident", Accident.class)
+                    .createQuery("select distinct a from Accident a join fetch a.type join fetch a.rules ",
+                            Accident.class)
                     .list();
         }
     }
@@ -32,7 +37,8 @@ public class AccidentHibernate {
     public Optional<Accident> findById(int id) {
         try (Session session = sf.openSession()) {
             return session
-                    .createQuery("from Accident where id=:fId", Accident.class)
+                    .createQuery("select distinct a from Accident a join fetch a.type join fetch a.rules where id=:fId",
+                            Accident.class)
                     .setParameter("fId", id)
                     .uniqueResultOptional();
         }
@@ -40,7 +46,9 @@ public class AccidentHibernate {
 
     public void update(Accident accident) {
         try (Session session = sf.openSession()) {
+            session.beginTransaction();
             session.merge(accident);
+            session.getTransaction().commit();
         }
     }
 }
