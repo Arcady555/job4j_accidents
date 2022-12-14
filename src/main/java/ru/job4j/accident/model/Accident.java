@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -23,6 +24,7 @@ public class Accident {
     private String name;
     private String text;
     private String address;
+    private LocalDateTime created;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "type_id")

@@ -31,10 +31,10 @@ public class AccidentHibernate {
 
     public Optional<Accident> findById(int id) {
         try (Session session = sf.openSession()) {
-            return Optional.ofNullable(session
+            return session
                     .createQuery("from Accident where id=:fId", Accident.class)
                     .setParameter("fId", id)
-                    .uniqueResult());
+                    .uniqueResultOptional();
         }
     }
 

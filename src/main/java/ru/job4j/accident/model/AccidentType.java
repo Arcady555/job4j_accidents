@@ -6,6 +6,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Data
@@ -15,6 +16,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "type")
 public class AccidentType {
+    @Id
     @EqualsAndHashCode.Include
     private int id;
     private String name;

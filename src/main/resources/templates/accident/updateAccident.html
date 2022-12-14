@@ -41,19 +41,19 @@
                 <div class="card-body">
                     <form th:action="@{/accidents/update}" method="POST" th:object="${accident}">
                         <input type="hidden" name="id" th:field="*{id}"/>
-                    <!--    <div class="form-group">
+                        <div class="form-group">
                             <label for="type.id">Тип</label>
                             <select class="form-control" id="type.id" name="type.id">
                                 <option th:each="type : ${types}" th:value="${type.id}" th:text="${type.name}"></option>
                             </select>
-                        </div> -->
+                        </div>
                         <div class="form-group">
                             <label for="name">Имя</label>
                             <input type="text" class="form-control" name="name" id="name" th:field="*{name}">
                         </div>
-                    <!--    <select class="form-control" id="rIds" name="rIds"  multiple>
+                        <select class="form-control" id="rIds" name="rIds"  multiple>
                             <option th:each="rule : ${rules}" th:value="${rule.id}"  th:text="${rule.name}"></option>
-                        </select> -->
+                        </select>
                         <div class="form-group">
                             <label for="name">Текст</label>
                             <input type="text" class="form-control" name="text" id="text" th:field="*{text}">

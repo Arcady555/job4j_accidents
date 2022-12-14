@@ -22,22 +22,4 @@ public class RuleService {
     public Optional<Rule> findById(int key) {
         return ruleStore.findById(key);
     }
-
-    public boolean toSetRules(Accident accident, HttpServletRequest req) {
-        boolean rsl = false;
-        Set<Rule> set = new HashSet<>();
-        String[] ids = req.getParameterValues("rIds");
-        if (ids != null) {
-            for (String str : ids) {
-                Optional<Rule> ruleOptional = findById(Integer.parseInt(str));
-                if (ruleOptional.isPresent()) {
-                    Rule rule = ruleOptional.get();
-                    set.add(rule);
-                    rsl = true;
-                }
-            }
-        }
-        accident.setRules(set);
-        return rsl;
-    }
 }

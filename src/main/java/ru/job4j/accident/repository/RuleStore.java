@@ -2,6 +2,8 @@ package ru.job4j.accident.repository;
 
 import lombok.AllArgsConstructor;
 import net.jcip.annotations.ThreadSafe;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import ru.job4j.accident.model.Accident;
@@ -14,10 +16,14 @@ import java.util.*;
 @AllArgsConstructor
 @ThreadSafe
 public class RuleStore {
-    private final JdbcTemplate jdbc;
+    private final SessionFactory sf;
 
     public Collection<Rule> findAll() {
-        return null;
+        try (Session session = sf.openSession()) {
+            return session
+                    .createQuery("from Rule", Rule.class)
+                    .list();
+        }
     }
 
     public Map<Integer, Set<Rule>> findAllSets() {
@@ -26,9 +32,14 @@ public class RuleStore {
     }
 
     public Optional<Rule> findById(int id) {
-        return null;
+        try (Session session = sf.openSession()) {
+            return session
+                    .createQuery("from Rule where rule_id=:fId", Rule.class)
+                    .setParameter("fId", id)
+                    .uniqueResultOptional();
+        }
     }
-
+/*
     public boolean toSetRules(Accident accident, HttpServletRequest req) {
         boolean rsl = false;
         Set<Rule> set = new HashSet<>();
@@ -49,5 +60,5 @@ public class RuleStore {
         }
         accident.setRules(set);
         return rsl;
-    }
+    } */
 }
