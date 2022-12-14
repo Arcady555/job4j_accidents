@@ -1,0 +1,4 @@
+CREATE TABLE IF NOT EXISTS type (
+   type_id SERIAL PRIMARY KEY,
+   type_name VARCHAR
+);

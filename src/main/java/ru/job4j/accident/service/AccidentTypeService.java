@@ -1,30 +1,25 @@
 package ru.job4j.accident.service;
 
+import lombok.AllArgsConstructor;
 import net.jcip.annotations.ThreadSafe;
 import org.springframework.stereotype.Service;
 import ru.job4j.accident.model.AccidentType;
+import ru.job4j.accident.repository.AccidentTypeStore;
 
 import java.util.Collection;
-import java.util.Map;
+import java.util.Optional;
 
 @Service
 @ThreadSafe
+@AllArgsConstructor
 public class AccidentTypeService {
-    private final Map<Integer, AccidentType> types;
-
-    public AccidentTypeService() {
-        this.types = Map.of(
-                1, new AccidentType(1, "Две машины"),
-                2, new AccidentType(2, "Машина и человек"),
-                3, new AccidentType(3, "Машина и велосипед")
-        );
-    }
+    private final AccidentTypeStore accidentTypeStore;
 
     public Collection<AccidentType> findAll() {
-        return types.values();
+        return accidentTypeStore.findAll();
     }
 
-    public AccidentType get(int id) {
-        return types.get(id);
+    public Optional<AccidentType> get(int id) {
+        return accidentTypeStore.get(id);
     }
 }

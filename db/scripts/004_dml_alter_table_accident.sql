@@ -1,0 +1,1 @@
+ALTER TABLE accident ADD COLUMN type_id int REFERENCES type(type_id);

@@ -8,12 +8,15 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import ru.job4j.accident.model.Accident;
+import ru.job4j.accident.model.Rule;
 import ru.job4j.accident.service.AccidentService;
 import ru.job4j.accident.service.AccidentTypeService;
 import ru.job4j.accident.service.RuleService;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Optional;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
+import java.util.*;
 
 @Controller
 @AllArgsConstructor
@@ -22,7 +25,7 @@ import java.util.Optional;
 public class AccidentControl {
     private final AccidentService accidents;
     private final AccidentTypeService types;
-    private final RuleService rules;
+    private final RuleService ruleService;
 
     @GetMapping("/{id}")
     public String accidentGet(Model model, @PathVariable("id") int id) {
@@ -33,26 +36,25 @@ public class AccidentControl {
 
     @GetMapping("/create")
     public String createAccidentGet(Model model) {
-        model.addAttribute("rules", rules.findAll());
+        model.addAttribute("rules", ruleService.findAll());
         model.addAttribute("types", types.findAll());
         model.addAttribute("accident",
-                new Accident(0, "", "", ""));
+                new Accident(0, "", "", "", null, null, null));
         return "accident/createAccident";
     }
 
     @PostMapping("/create")
     public String createAccidentPost(@ModelAttribute Accident accident, HttpServletRequest req) {
-       /** if (!rules.toSetRules(accident, req)) {
+        if (!fullTask(accident, req)) {
             return "redirect:/accidents/set-rule";
         }
-        accident.setType(types.get(accident.getType().getId())); */
         accidents.create(accident);
         return "redirect:/index";
     }
 
     @GetMapping("/update")
     public String updateGet(@RequestParam("id") int id, Model model) {
-        model.addAttribute("rules", rules.findAll());
+        model.addAttribute("rules", ruleService.findAll());
         model.addAttribute("types", types.findAll());
         String rsl = "accident/updateAccident";
         addAttrAccident(model, id, rsl);
@@ -61,15 +63,10 @@ public class AccidentControl {
 
     @PostMapping("/update")
     public String updatePost(@ModelAttribute Accident accident, HttpServletRequest req) {
-      /**  if (!rules.toSetRules(accident, req)) {
+        if (!fullTask(accident, req)) {
             return "redirect:/accidents/set-rule";
         }
-        accident.setType(types.get(accident.getType().getId())); */
-        System.out.println(accident.getName());
-        System.out.println(accident.getId());
         accidents.update(accident);
-        System.out.println(accident.getName());
-        System.out.println(accident.getId());
         return "redirect:/index";
     }
 
@@ -90,5 +87,26 @@ public class AccidentControl {
         } else {
             str = "redirect:/accidents/page-not-found";
         }
+    }
+
+    private boolean fullTask(Accident accident, HttpServletRequest req) {
+        boolean rsl = false;
+        Set<Rule> rules = new HashSet<>();
+        String[] rIds = req.getParameterValues("rIds");
+        if (rIds != null) {
+            for (String str : rIds) {
+                int ruleId = Integer.parseInt(str);
+                Optional<Rule> ruleOptional = ruleService.findById(ruleId);
+                if (ruleOptional.isEmpty()) {
+                    return false;
+                }
+                Rule rule = ruleOptional.get();
+                rules.add(rule);
+                rsl = true;
+            }
+        }
+        accident.setRules(rules);
+        accident.setCreated(LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS));
+        return rsl;
     }
 }
