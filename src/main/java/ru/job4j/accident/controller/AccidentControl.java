@@ -48,7 +48,7 @@ public class AccidentControl {
         if (!fullTask(accident, req)) {
             return "redirect:/accidents/set-rule";
         }
-        accidents.create(accident);
+        accidents.save(accident);
         return "redirect:/index";
     }
 
@@ -66,7 +66,7 @@ public class AccidentControl {
         if (!fullTask(accident, req)) {
             return "redirect:/accidents/set-rule";
         }
-        accidents.update(accident);
+        accidents.save(accident);
         return "redirect:/index";
     }
 

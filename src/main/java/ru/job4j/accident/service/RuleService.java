@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import net.jcip.annotations.ThreadSafe;
 import org.springframework.stereotype.Service;
 import ru.job4j.accident.model.Rule;
-import ru.job4j.accident.repository.RuleStore;
+import ru.job4j.accident.repository.RuleRepository;
 
 import java.util.*;
 
@@ -12,9 +12,9 @@ import java.util.*;
 @ThreadSafe
 @AllArgsConstructor
 public class RuleService {
-    private RuleStore ruleStore;
+    private RuleRepository ruleStore;
 
-    public Collection<Rule> findAll() {
+    public Iterable<Rule> findAll() {
         return ruleStore.findAll();
     }
 
