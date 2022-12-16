@@ -15,9 +15,6 @@ import java.util.List;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
 @Table(name = "type")
-@NamedEntityGraph(name = "AccidentType.accidents",
-        attributeNodes = @NamedAttributeNode("accidents")
-)
 public class AccidentType {
     @Id
     @EqualsAndHashCode.Include
