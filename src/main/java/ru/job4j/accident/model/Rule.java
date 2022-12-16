@@ -15,6 +15,9 @@ import java.util.Set;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
 @Table(name = "rule")
+@NamedEntityGraph(name = "Rule.accidents",
+        attributeNodes = @NamedAttributeNode("accidents")
+)
 public class Rule {
     @Id
     @EqualsAndHashCode.Include

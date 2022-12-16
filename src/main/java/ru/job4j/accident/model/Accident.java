@@ -15,6 +15,9 @@ import java.util.Set;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
 @Table(name = "accident")
+@NamedEntityGraph(name = "AccidentType.rules",
+        attributeNodes = @NamedAttributeNode("rules")
+)
 public class Accident {
 
     @EqualsAndHashCode.Include
@@ -27,7 +30,7 @@ public class Accident {
     private LocalDateTime created;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "type_id")
+    @JoinColumn(name = "type")
     private AccidentType type;
 
     @ManyToMany

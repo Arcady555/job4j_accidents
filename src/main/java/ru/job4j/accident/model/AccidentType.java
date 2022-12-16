@@ -5,10 +5,9 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -16,6 +15,9 @@ import javax.persistence.Table;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
 @Table(name = "type")
+@NamedEntityGraph(name = "AccidentType.accidents",
+        attributeNodes = @NamedAttributeNode("accidents")
+)
 public class AccidentType {
     @Id
     @EqualsAndHashCode.Include
@@ -23,4 +25,6 @@ public class AccidentType {
     private int id;
     @Column(name = "type_name")
     private String name;
+    @OneToMany(mappedBy = "type")
+    private List<Accident> accidents = new ArrayList<>();
 }
