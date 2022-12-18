@@ -27,14 +27,15 @@
                 <a class="nav-item nav-link" th:href="@{/index}">Инциденты</a>
                 <a class="nav-item nav-link active" th:href="@{/accidents/create}">Добавить Инцидент</a>
                 <a class="nav-item nav-link" th:href="@{/registration}">Добавить пользователя</a>
-           <!--     <a class="nav-item nav-link" th:if="${user.name == 'Гость'}" th:href="@{/loginPage}">
+              <!--  <a class="nav-item nav-link" th:if="${user.name == 'Гость'}" th:href="@{/login}">
                     <span th:text="${user.name}"></span>
                     <span> | Войти</span>
                 </a>
                 <a class="nav-item nav-link" th:if="${user.name != 'Гость'}" th:href="@{/logout}">
                     <span th:text="${user.name}"></span>
-                    <span> | Выйти</span>
-                </a>  -->
+                    <span> | Выйти</span> -->
+                <a class="nav-item nav-link" th:href="@{/logout}">Выйти</a>
+                </a>
             </div>
         </div>
     </nav>
