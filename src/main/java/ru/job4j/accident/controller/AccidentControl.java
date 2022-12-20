@@ -3,6 +3,7 @@ package ru.job4j.accident.controller;
 import lombok.AllArgsConstructor;
 import net.jcip.annotations.ThreadSafe;
 
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -36,6 +37,7 @@ public class AccidentControl {
 
     @GetMapping("/create")
     public String createAccidentGet(Model model) {
+        model.addAttribute("user", SecurityContextHolder.getContext().getAuthentication().getPrincipal());
         model.addAttribute("rules", ruleService.findAll());
         model.addAttribute("types", types.findAll());
         model.addAttribute("accident",
@@ -71,16 +73,19 @@ public class AccidentControl {
     }
 
     @GetMapping("/page-not-found")
-    public String pageNotFound() {
+    public String pageNotFound(Model model) {
+        model.addAttribute("user", SecurityContextHolder.getContext().getAuthentication().getPrincipal());
         return "pageNotFound";
     }
 
     @GetMapping("/set-rule")
-    public String withoutRule() {
+    public String withoutRule(Model model) {
+        model.addAttribute("user", SecurityContextHolder.getContext().getAuthentication().getPrincipal());
         return "setRule";
     }
 
     private void addAttrAccident(Model model, int id, String str) {
+        model.addAttribute("user", SecurityContextHolder.getContext().getAuthentication().getPrincipal());
         Optional<Accident> accidentOptional = accidents.findById(id);
         if (accidentOptional.isPresent()) {
             model.addAttribute("accident", accidentOptional.get());

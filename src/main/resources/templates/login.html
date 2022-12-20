@@ -15,6 +15,31 @@
     <title>Автомобильные инциденты</title>
 </head>
 <body>
+<div>
+<nav class="navbar navbar-expand-lg alert alert-primary">
+    <!--   <a class="navbar-brand" href="#">Происшествия</a>
+       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+           <span class="navbar-toggler-icon"></span>
+       </button> -->
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav" >
+            <!--    <a class="nav-item nav-link" href="#">Главная</a>  -->
+            <a class="nav-item nav-link" th:href="@{/index}">Инциденты</a>
+            <a class="nav-item nav-link active" th:href="@{/accidents/create}">Добавить Инцидент</a>
+            <a class="nav-item nav-link" th:href="@{/registration}">Добавить пользователя</a>
+            <!--  <a class="nav-item nav-link" th:if="${user.name == 'Гость'}" th:href="@{/login}">
+                  <span th:text="${user.name}"></span>
+                  <span> | Войти</span>
+              </a>
+              <a class="nav-item nav-link" th:if="${user.name != 'Гость'}" th:href="@{/logout}">
+                  <span th:text="${user.name}"></span>
+                  <span> | Выйти</span> -->
+            <a class="nav-item nav-link" th:href="@{/logout}">Выйти</a>
+            </a>
+        </div>
+    </div>
+</nav>
+</div>
 <div class="container py-3">
     <main class="form-signin">
         <h1 class="h3 mb-3 fw-normal">Авторизация</h1>
