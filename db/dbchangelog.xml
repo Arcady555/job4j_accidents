@@ -15,4 +15,8 @@ xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
     <include file="scripts/005_ddl_create_rule_table.sql" relativeToChangelogFile="true"/>
     <include file="scripts/006_dml_insert_into_rule.sql" relativeToChangelogFile="true"/>
     <include file="scripts/007_ddl_create_accident_rule_table.sql" relativeToChangelogFile="true"/>
+    <include file="security/008_ddl_create_authorities_table.sql" relativeToChangelogFile="true"/>
+    <include file="security/009_ddl_create_users_table.sql" relativeToChangelogFile="true"/>
+    <include file="security/010_dml_insert_into_authorities.sql" relativeToChangelogFile="true"/>
+    <include file="security/011_dml_insert_into_users.sql" relativeToChangelogFile="true"/>
 </databaseChangeLog>

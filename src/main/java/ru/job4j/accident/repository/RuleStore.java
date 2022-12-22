@@ -20,7 +20,6 @@ public class RuleStore {
     private final JdbcTemplate jdbc;
     private final RuleMapper rowMapper;
     private final RuleExtractor ruleExtractor;
-    private final AccidentMapper accidentMapper;
 
     public Collection<Rule> findAll() {
         return jdbc.query("select * from rule", rowMapper);
