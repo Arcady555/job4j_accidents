@@ -32,7 +32,7 @@ public class RegControl {
         try {
             users.save(user);
         } catch (Exception e) {
-            return "registration";
+            return "redirect:/registration?error=true";
         }
         return "redirect:/login";
     }
