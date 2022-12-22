@@ -9,15 +9,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import ru.job4j.accident.model.Accident;
-import ru.job4j.accident.model.Rule;
 import ru.job4j.accident.service.AccidentService;
 import ru.job4j.accident.service.AccidentTypeService;
 import ru.job4j.accident.service.RuleService;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.HashSet;
 import java.util.Optional;
-import java.util.Set;
 
 @Controller
 @AllArgsConstructor

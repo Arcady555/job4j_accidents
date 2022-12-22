@@ -15,7 +15,7 @@ public class UserRepository {
     private final UserMapper userMapper;
 
     public User save(User user) {
-        jdbc.update("insert into accident (username, password, enabled, authority_id) values (?, ?, ?, ?)",
+        jdbc.update("insert into users (username, password, enabled, authority_id) values (?, ?, ?, ?)",
                 user.getUsername(),
                 user.getPassword(),
                 user.isEnabled(),

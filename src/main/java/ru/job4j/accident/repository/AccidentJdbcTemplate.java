@@ -7,16 +7,12 @@ import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 import ru.job4j.accident.model.Accident;
-import ru.job4j.accident.repository.resultsetextractor.RuleExtractor;
 import ru.job4j.accident.repository.rowmapper.AccidentMapper;
 
 import java.sql.PreparedStatement;
-import java.sql.Statement;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.Collection;
-import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 @Repository

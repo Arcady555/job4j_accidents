@@ -7,7 +7,6 @@ import org.springframework.stereotype.Repository;
 import ru.job4j.accident.model.Accident;
 import ru.job4j.accident.model.Rule;
 import ru.job4j.accident.repository.resultsetextractor.RuleExtractor;
-import ru.job4j.accident.repository.rowmapper.AccidentMapper;
 import ru.job4j.accident.repository.rowmapper.RuleMapper;
 
 import javax.servlet.http.HttpServletRequest;
