@@ -21,7 +21,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
-    <profiles>
+  <!--  <profiles>
         <profile>
             <id>test</id>
             <properties>
@@ -37,7 +37,7 @@
                 <liquibase.config>src/main/resources/liquibase.properties</liquibase.config>
             </properties>
         </profile>
-    </profiles>
+    </profiles>  -->
 
     <dependencies>
 
