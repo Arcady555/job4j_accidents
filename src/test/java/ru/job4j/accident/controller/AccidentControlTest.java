@@ -84,7 +84,7 @@ public class AccidentControlTest {
     @WithMockUser
     public void shouldReturnDefaultMessage() throws Exception {
         this.mockMvc.perform(post("/accidents/create")
-                        .param("name","Авария!!!"))
+                        .param("name", "Авария!!!"))
                 .andDo(print())
                 .andExpect(status().is3xxRedirection());
         ArgumentCaptor<Accident> argument = ArgumentCaptor.forClass(Accident.class);
