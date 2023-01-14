@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import javax.sql.DataSource;
 
 @Configuration
-@PropertySource("classpath:liquibase.properties")
+@PropertySource("classpath:application.properties")
 @EnableTransactionManagement
 public class JdbcConfig {
 
