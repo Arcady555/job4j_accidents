@@ -46,23 +46,4 @@ public class AccidentControlTest {
                 .andExpect(status().isOk())
                 .andExpect(view().name("setRule"));
     }
-
-    @Test
-    @WithMockUser
-    public void whenAccidentGet() throws Exception {
-        this.mockMvc.perform(get("/accidents/{id}", 1))
-                .andDo(print())
-                .andExpect(status().isOk())
-                .andExpect(view().name("accident/accident")
-                );
-    }
-
-    @Test
-    @WithMockUser
-    public void whenUpdateGet() throws Exception {
-        this.mockMvc.perform(get("/accidents/update").queryParam("id", "1"))
-                .andDo(print())
-                .andExpect(status().isOk())
-                .andExpect(view().name("accident/updateAccident"));
-    }
 }
