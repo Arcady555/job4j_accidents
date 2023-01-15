@@ -15,10 +15,10 @@ import javax.sql.DataSource;
 public class JdbcConfig {
 
     @Bean
-    public DataSource ds(@Value("${spring.datasource.driver}") String driver,
-                         @Value("${spring.datasource.url}") String url,
+    public DataSource ds(@Value("${spring.datasource.url}") String url,
                          @Value("${spring.datasource.username}") String username,
-                         @Value("${spring.datasource.password}") String password) {
+                         @Value("${spring.datasource.password}") String password,
+                         @Value("${spring.datasource.driver}") String driver) {
         BasicDataSource ds = new BasicDataSource();
         ds.setDriverClassName(driver);
         ds.setUrl(url);

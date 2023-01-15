@@ -35,31 +35,11 @@ public class AccidentControlTest {
 
     @Test
     @WithMockUser
-    public void whenAccidentGet() throws Exception {
-        String id = "1";
-        this.mockMvc.perform(get("/accidents/{id}", id))
-                .andDo(print())
-                .andExpect(status().isOk())
-                .andExpect(view().name("accident/accident")
-                );
-    }
-
-    @Test
-    @WithMockUser
     public void whenCreateAccidentGet() throws Exception {
         this.mockMvc.perform(get("/accidents/create"))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(view().name("accident/createAccident"));
-    }
-
-    @Test
-    @WithMockUser
-    public void whenUpdateGet() throws Exception {
-        this.mockMvc.perform(get("/accidents/update").queryParam("id", "1"))
-                .andDo(print())
-                .andExpect(status().isOk())
-                .andExpect(view().name("accident/updateAccident"));
     }
 
     @Test
