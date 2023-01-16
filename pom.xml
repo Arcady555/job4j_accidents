@@ -39,6 +39,8 @@
         </profile>
     </profiles>
 
+    <packaging>war</packaging>
+
     <dependencies>
 
         <dependency>
