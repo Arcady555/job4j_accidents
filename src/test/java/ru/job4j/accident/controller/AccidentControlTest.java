@@ -17,7 +17,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = Main.class)
 @AutoConfigureMockMvc
 public class AccidentControlTest {
- /*   @Autowired
+    @Autowired
     private MockMvc mockMvc;
 
     @Test
@@ -66,5 +66,4 @@ public class AccidentControlTest {
                 .andExpect(status().isOk())
                 .andExpect(view().name("accident/updateAccident"));
     }
-     */
 }
