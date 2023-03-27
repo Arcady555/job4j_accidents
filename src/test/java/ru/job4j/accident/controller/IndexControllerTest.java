@@ -17,7 +17,7 @@ import ru.job4j.Main;
 @SpringBootTest(classes = Main.class)
 @AutoConfigureMockMvc
 public class IndexControllerTest {
-/*
+
     @Autowired
     private MockMvc mockMvc;
 
@@ -28,5 +28,5 @@ public class IndexControllerTest {
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(view().name("index"));
-    } */
+    }
 }
